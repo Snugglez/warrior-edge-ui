@@ -9,7 +9,7 @@ A toolbox/electron gui based workaround for warrior edge being slow/getting stuc
 
 `/8 edgeui scale somenumber` changes the scale of the ui (default is 0.75)
 
-`/8 edgeui LAUREL_NAME` change whatever laurel you want to see, example `/8 edgeui champ` will use the champion laurel
+`/8 edgeui laurel name` change whatever laurel you want to see, example `/8 edgeui laurel champ` will use the champion laurel
 
 
 ### Available laurels
