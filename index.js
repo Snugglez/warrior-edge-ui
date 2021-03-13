@@ -1,5 +1,4 @@
 exports.NetworkMod = function edgeUI(mod) {
-  //constructor(mod) {
   if (!global.TeraProxy.GUIMode)
     throw new Error('Proxy GUI is not running!');
 
@@ -12,6 +11,7 @@ exports.NetworkMod = function edgeUI(mod) {
     alwaysOnTop: true,
     fullscreen: false,
     fullscreenable: false,
+    skipTaskBar: false,
     width: 182,
     height: 182,
     resizable: false,
@@ -24,9 +24,19 @@ exports.NetworkMod = function edgeUI(mod) {
   }, false, path.join(__dirname, 'ui'))
 
   let opened = false,
-    curEdge = 0
+    curEdge = 0,
+    focused = null,
+    focusChange = true
   mod.game.on('enter_game', () => { if (mod.game.me.class == 'warrior' && !opened) { mod.command.exec('edgeui') } })
   mod.game.on('leave_game', () => { ui.close() })
+
+  async function moveTop() {
+    focused = await mod.clientInterface.hasFocus()
+    if (!focused && focusChange) { ui.window.setAlwaysOnTop(false); focusChange = false; }
+    if (focused && !focusChange) { ui.window.setAlwaysOnTop(true, 'screen-saver', 1); ui.window.blur(); focusChange = true; }
+    if (!focused) return;
+    ui.window.moveTop()
+  }
 
   mod.command.add('edgeui', (arg, arg2) => {
     if (!opened && !arg || !opened && ['open', 'gui', 'ui'].includes(arg)) {
@@ -36,7 +46,7 @@ exports.NetworkMod = function edgeUI(mod) {
       ui.window.setPosition(mod.settings.windowPos[0], mod.settings.windowPos[1]);
       ui.window.setAlwaysOnTop(true, 'screen-saver', 1);
       ui.window.setVisibleOnAllWorkspaces(true);
-      mod.setInterval(() => { ui.window.moveTop() }, 1000);
+      mod.setInterval(() => { moveTop() }, 50);
       ui.window.on('close', () => { mod.settings.windowPos = ui.window.getPosition(); mod.clearAllIntervals(); opened = false });
     }
     if (opened && arg == 'laurel' && ['champ', 'diamond', 'gold', 'silver', 'bronze', 'none'].includes(arg2)) {
@@ -58,14 +68,6 @@ exports.NetworkMod = function edgeUI(mod) {
       ui.window.setBounds({ width: Math.floor(182 * parseFloat(arg2)) + 12, height: Math.floor(178 * parseFloat(arg2)) + 12 })
     }
   })
-  /*mod.command.add('laurelcycle', () => {
-    setTimeout(() => { ui.send('edgeLaurel', { text: 'none' }) }, 500);
-    setTimeout(() => { ui.send('edgeLaurel', { text: 'bronze' }) }, 1000);
-    setTimeout(() => { ui.send('edgeLaurel', { text: 'silver' }) }, 1500);
-    setTimeout(() => { ui.send('edgeLaurel', { text: 'gold' }) }, 2000);
-    setTimeout(() => { ui.send('edgeLaurel', { text: 'diamond' }) }, 2500);
-    setTimeout(() => { ui.send('edgeLaurel', { text: 'champ' }) }, 3000);
-  })*/
 
   mod.hook('S_PLAYER_STAT_UPDATE', 14, (e) => {
     if (!mod.game.me.class == 'warrior' || !opened || curEdge == e.edge) return
@@ -74,5 +76,3 @@ exports.NetworkMod = function edgeUI(mod) {
   })
 
 }
-
-//}
