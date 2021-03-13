@@ -28,14 +28,13 @@ exports.NetworkMod = function edgeUI(mod) {
     focused = null,
     focusChange = true
   mod.game.on('enter_game', () => { if (mod.game.me.class == 'warrior' && !opened) { mod.command.exec('edgeui') } })
-  mod.game.on('leave_game', () => { ui.close() })
+  mod.game.on('leave_game', () => { ui.close(); mod.clearAllIntervals() })
 
   async function moveTop() {
     focused = await mod.clientInterface.hasFocus()
-    if (!focused && focusChange) { ui.window.setAlwaysOnTop(false); focusChange = false; }
-    if (focused && !focusChange) { ui.window.setAlwaysOnTop(true, 'screen-saver', 1); ui.window.blur(); focusChange = true; }
-    if (!focused) return;
-    ui.window.moveTop()
+    if (!focused && focusChange) { ui.hide(); focusChange = false; }
+    if (focused && !focusChange) { ui.show(); focusChange = true; }
+    if (focused) ui.window.moveTop()
   }
 
   mod.command.add('edgeui', (arg, arg2) => {
@@ -46,7 +45,7 @@ exports.NetworkMod = function edgeUI(mod) {
       ui.window.setPosition(mod.settings.windowPos[0], mod.settings.windowPos[1]);
       ui.window.setAlwaysOnTop(true, 'screen-saver', 1);
       ui.window.setVisibleOnAllWorkspaces(true);
-      mod.setInterval(() => { moveTop() }, 50);
+      mod.setInterval(() => { moveTop() }, 500);
       ui.window.on('close', () => { mod.settings.windowPos = ui.window.getPosition(); mod.clearAllIntervals(); opened = false });
     }
     if (opened && arg == 'laurel' && ['champ', 'diamond', 'gold', 'silver', 'bronze', 'none'].includes(arg2)) {
