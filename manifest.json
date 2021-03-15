@@ -2,10 +2,10 @@
 	"files": {
 		"README.md": "ba24db0ca594d7c501771674505ccbf905aa95ee59069afc92d9220964791d9c",
 		"config_generator.js": "8dd6a39be23936f521b51af0389cee569a79707d24372223dd092e2dea1dc720",
-		"index.js": "b0a7db95dc6af7f15e75b55b4e6597498b1a17c62b88fc79623b3cafb555d988",
-		"module.json": "df0f569ba93f03d54b4b91b6f91db97cc29f47417f049c953f8441325a42220e",
-		"ui/index.html": "9442fd556402c8b69f02dad10ed9eed87723b3016097cb2f5e1abf0aea877509",
-		"ui/main.js": "d1beef5ec1174813fd60adee0d6a17bfcfb8c3d360a71ce667149c3ffcf02589"
+		"index.js": "f2f27b19b7341742212098187c0d4256075f267c3bb320bab01d7399e54ae85f",
+		"module.json": "2af6219170979e5cac683d0506cc43870f7dcf0949616d2e9e77760b823e2fea",
+		"ui/index.html": "1a9f1fdbfb708920629ab6397b257c71dd8f405f61bd7f2b16c537d930df1c6f",
+		"ui/main.js": "4bfb6181270186e208abfb76c74a7fd275507f0f28aa05e86a8b9faf7182e3b6"
 	},
 	"defs": {
 		"S_PLAYER_STAT_UPDATE": 14

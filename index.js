@@ -1,9 +1,9 @@
-exports.NetworkMod = function edgeUI(mod) {
-  if (!global.TeraProxy.GUIMode)
-    throw new Error('Proxy GUI is not running!');
+if (!global.TeraProxy.GUIMode) throw new Error('Proxy GUI is not running!');
+const { Host } = require('tera-mod-ui');
+const path = require("path");
 
-  const { Host } = require('tera-mod-ui');
-  const path = require("path")
+exports.NetworkMod = function edgeUI(mod) {
+
   let ui = new Host(mod, 'index.html', {
     title: 'edgeui',
     transparent: true,
@@ -26,13 +26,14 @@ exports.NetworkMod = function edgeUI(mod) {
   let opened = false,
     curEdge = 0,
     focused = null,
-    focusChange = true
+    focusChange = true,
+    moving = false
   mod.game.on('enter_game', () => { if (mod.game.me.class == 'warrior' && !opened) { mod.command.exec('edgeui') } })
   mod.game.on('leave_game', () => { ui.close(); mod.clearAllIntervals() })
 
   async function moveTop() {
     focused = await mod.clientInterface.hasFocus()
-    if (!focused && focusChange) { ui.hide(); focusChange = false; }
+    if (!focused && focusChange && !moving) { ui.hide(); focusChange = false; }
     if (focused && !focusChange) { ui.show(); focusChange = true; }
     if (focused) ui.window.moveTop()
   }
@@ -46,6 +47,8 @@ exports.NetworkMod = function edgeUI(mod) {
       ui.window.setAlwaysOnTop(true, 'screen-saver', 1);
       ui.window.setVisibleOnAllWorkspaces(true);
       mod.setInterval(() => { moveTop() }, 500);
+      ui.window.on('move', () => { moving = true; })
+      ui.window.on('moved', () => { mod.setTimeout(() => { moving = false; }, 500) })
       ui.window.on('close', () => { mod.settings.windowPos = ui.window.getPosition(); mod.clearAllIntervals(); opened = false });
     }
     if (opened && arg == 'laurel' && ['champ', 'diamond', 'gold', 'silver', 'bronze', 'none'].includes(arg2)) {
