@@ -2,13 +2,14 @@ if (!global.TeraProxy.GUIMode) throw new Error('Proxy GUI is not running!');
 const { Host } = require('tera-mod-ui');
 const path = require("path");
 
-exports.NetworkMod = function edgeUI(mod) {
+exports.NetworkMod = function edgeUI(d) {
 
-  let ui = new Host(mod, 'index.html', {
+  let ui = new Host(d, 'index.html', {
     title: 'edgeui',
     transparent: true,
     frame: false,
     alwaysOnTop: true,
+    maximizable: false,
     fullscreen: false,
     fullscreenable: false,
     skipTaskBar: false,
@@ -16,8 +17,8 @@ exports.NetworkMod = function edgeUI(mod) {
     height: 182,
     resizable: false,
     center: true,
-    x: mod.settings.windowPos[0],
-    y: mod.settings.windowPos[1],
+    x: d.settings.windowPos[0],
+    y: d.settings.windowPos[1],
     autoHideMenuBar: true,
     titleBarStyle: 'hidden',
     webPreferences: { nodeIntegration: true, devTools: false }
@@ -28,32 +29,31 @@ exports.NetworkMod = function edgeUI(mod) {
     focused = null,
     focusChange = true,
     moving = false
-  mod.game.on('enter_game', () => { if (mod.game.me.class == 'warrior' && !opened) { mod.command.exec('edgeui') } })
-  mod.game.on('leave_game', () => { ui.close(); mod.clearAllIntervals() })
+  d.game.on('enter_game', () => { if (d.game.me.class == 'warrior' && !opened) { d.command.exec('edgeui') } })
+  d.game.on('leave_game', () => { ui.close(); d.clearAllIntervals() })
 
   async function moveTop() {
-    focused = await mod.clientInterface.hasFocus()
+    focused = await d.clientInterface.hasFocus()
     if (!focused && focusChange && !moving) { ui.hide(); focusChange = false; }
     if (focused && !focusChange) { ui.show(); focusChange = true; }
     if (focused) ui.window.moveTop()
   }
 
-  mod.command.add('edgeui', (arg, arg2) => {
+  d.command.add('edgeui', (arg, arg2) => {
     if (!opened && !arg || !opened && ['open', 'gui', 'ui'].includes(arg)) {
       opened = true
       ui.show();
-      setTimeout(() => { ui.send('edgeLaurel', { text: mod.settings.laurel }); mod.command.exec(`edgeui scale ${mod.settings.scale}`) }, 150)
-      ui.window.setPosition(mod.settings.windowPos[0], mod.settings.windowPos[1]);
+      setTimeout(() => { ui.send('edgeLaurel', { text: d.settings.laurel }); d.command.exec(`edgeui scale ${d.settings.scale}`) }, 150)
+      ui.window.setPosition(d.settings.windowPos[0], d.settings.windowPos[1]);
       ui.window.setAlwaysOnTop(true, 'screen-saver', 1);
       ui.window.setVisibleOnAllWorkspaces(true);
-      mod.setInterval(() => { moveTop() }, 500);
+      d.setInterval(() => { moveTop() }, 500);
       ui.window.on('move', () => { moving = true; })
-      ui.window.on('moved', () => { mod.setTimeout(() => { moving = false; }, 500) })
-      ui.window.on('close', () => { mod.settings.windowPos = ui.window.getPosition(); mod.clearAllIntervals(); opened = false });
+      ui.window.on('moved', () => { d.setTimeout(() => { moving = false; }, 500) })
+      ui.window.on('close', () => { d.settings.windowPos = ui.window.getPosition(); d.clearAllIntervals(); opened = false });
     }
     if (opened && arg == 'laurel' && ['champ', 'diamond', 'gold', 'silver', 'bronze', 'none'].includes(arg2)) {
-      mod.settings.laurel = arg2
-      mod.command.message(`laurel set to ${arg2}`)
+      d.settings.laurel = arg2
       switch (arg2) {
         case 'champ': ui.send('edgeLaurel', { text: arg2 }); break;
         case 'diamond': ui.send('edgeLaurel', { text: arg2 }); break;
@@ -62,17 +62,18 @@ exports.NetworkMod = function edgeUI(mod) {
         case 'bronze': ui.send('edgeLaurel', { text: arg2 }); break;
         case 'none': ui.send('edgeLaurel', { text: arg2 }); break;
       }
+      d.command.message(`laurel set to ${arg2}`)
     }
     if (opened && arg == 'scale') {
-      mod.settings.scale = parseFloat(arg2)
-      mod.command.message(`scale set to ${parseFloat(arg2)}`)
+      d.settings.scale = parseFloat(arg2)
+      d.command.message(`scale set to ${parseFloat(arg2)}`)
       ui.send('edgeResize', { text: parseFloat(arg2) })
       ui.window.setBounds({ width: Math.floor(182 * parseFloat(arg2)) + 12, height: Math.floor(178 * parseFloat(arg2)) + 12 })
     }
   })
 
-  mod.hook('S_PLAYER_STAT_UPDATE', 14, (e) => {
-    if (!mod.game.me.class == 'warrior' || !opened || curEdge == e.edge) return
+  d.hook('S_PLAYER_STAT_UPDATE', 15, (e) => {
+    if (!d.game.me.class == 'warrior' || !opened || curEdge == e.edge) return
     curEdge = e.edge
     ui.send('edgeUpdate', { text: e.edge })
   })

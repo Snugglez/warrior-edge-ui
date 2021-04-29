@@ -18,16 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
   mod.on('edgeResize', (y) => {
     document.getElementById("mainBody").style.transform = `scale(${y.text})`;
   })
+
   mod.on('edgeUpdate', (y) => {
-    //edgeCount.style['transform'] = 'translate(0px,0px);';
     switch (y.text) {
       case 0: {
         edgeBar.style['stroke-dashoffset'] = 460;
         edgeCount.innerHTML = 0;
         edgeCount.style['color'] = '#CFCFC4';
-        setTimeout(() => {
-          edgeCount.style['animation'] = '0.1 noShake';
-        }, 100);
+        setTimeout(() => { edgeCount.style['animation'] = '0.1 noShake'; }, 100);
       } break;
       case 1: { edgeBar.style['stroke-dashoffset'] = 442; edgeCount.innerHTML = 1; edgeCount.style['color'] = '#C7CEEA'; } break;
       case 2: { edgeBar.style['stroke-dashoffset'] = 413; edgeCount.innerHTML = 2; edgeCount.style['color'] = '#C7CEEA'; } break;

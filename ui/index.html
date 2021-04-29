@@ -34,7 +34,15 @@
       transform: translate(-48%, -45%) rotate(135deg);
       text-align: center;
       -webkit-app-region: drag;
-      overflow: hidden
+    }
+
+    #tcCount {
+      font-size: 150%;
+      transform: translate(-35%, 25%) rotate(135deg);
+    }
+
+    .tcText::-webkit-scrollbar {
+      display: none;
     }
 
     img.imgBg {
@@ -93,7 +101,16 @@
       }
     }
 
+    @keyframes noShake {
+
+      0%,
+      100% {
+        transform: translate(-48%, -45%) rotate(135deg)
+      }
+    }
+
     body {
+
       position: relative;
       width: 100%;
       overflow: hidden;
