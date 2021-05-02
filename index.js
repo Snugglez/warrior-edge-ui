@@ -43,7 +43,7 @@ exports.NetworkMod = function edgeUI(d) {
     if (!opened && !arg || !opened && ['open', 'gui', 'ui'].includes(arg)) {
       opened = true
       ui.show();
-      setTimeout(() => { ui.send('edgeLaurel', { text: d.settings.laurel }); d.command.exec(`edgeui scale ${d.settings.scale}`) }, 150)
+      setTimeout(() => { ui.send('edgeLaurel', { text: d.settings.laurel }); d.command.exec(`edgeui scale ${d.settings.scale}`) }, 500)
       ui.window.setPosition(d.settings.windowPos[0], d.settings.windowPos[1]);
       ui.window.setAlwaysOnTop(true, 'screen-saver', 1);
       ui.window.setVisibleOnAllWorkspaces(true);
