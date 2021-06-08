@@ -2,12 +2,12 @@
 	"files": {
 		"README.md": "ba24db0ca594d7c501771674505ccbf905aa95ee59069afc92d9220964791d9c",
 		"config_generator.js": "8dd6a39be23936f521b51af0389cee569a79707d24372223dd092e2dea1dc720",
-		"index.js": "08bcd9c55f61b0f65b159b62e40e243151ab918318ea3a715a0df2e52188c728",
+		"index.js": "1a21063e854ce44b9834beabe3f8f5231df90ec84dce2b429dd2ea4ddbd29efc",
 		"module.json": "2af6219170979e5cac683d0506cc43870f7dcf0949616d2e9e77760b823e2fea",
 		"ui/index.html": "52817d4ea27221fc4052e93fb1ec770031d38bf1db9f0480682cdc475ce1c3ba",
 		"ui/main.js": "cb58bd910b967126f7307fc810240edd598d9247a415acf1777409550025860b"
 	},
 	"defs": {
-		"S_PLAYER_STAT_UPDATE": [14,15]
+		"S_PLAYER_STAT_UPDATE": [14,15,16]
 	}
 }

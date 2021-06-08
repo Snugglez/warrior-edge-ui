@@ -72,7 +72,7 @@ exports.NetworkMod = function edgeUI(d) {
     }
   })
 
-  d.hook('S_PLAYER_STAT_UPDATE', 15, (e) => {
+  d.hook('S_PLAYER_STAT_UPDATE', 16, (e) => {
     if (!d.game.me.class == 'warrior' || !opened || curEdge == e.edge) return
     curEdge = e.edge
     ui.send('edgeUpdate', { text: e.edge })
