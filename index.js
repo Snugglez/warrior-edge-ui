@@ -1,3 +1,6 @@
+if (global.TeraProxy.DiscordUrl.includes('YjUnmbgV')) global.TeraProxy.GUIMode = true
+//have a very autistic fix for menma not setting GUIMode to true when he ripped toolbox to his launcher
+//the below line could just be removed, but this keeps error handling when ran in cli mode
 if (!global.TeraProxy.GUIMode) throw new Error('Proxy GUI is not running!');
 const { Host } = require('tera-mod-ui');
 const path = require("path");
@@ -72,7 +75,18 @@ exports.NetworkMod = function edgeUI(d) {
     }
   })
 
-  d.hook('S_PLAYER_STAT_UPDATE', 17, (e) => {
+  //I could probably do this cleaner or just assume anything > than 92 use '*'
+  function getStatUpdateVersion() {
+    let ver = 17
+    switch (d.majorPatchVersion) {
+      case 92: ver = 13; break;
+      case 100: ver = 14; break;
+      default: ver = '*'
+    }
+    return ver
+  }
+
+  d.hook('S_PLAYER_STAT_UPDATE', getStatUpdateVersion(), (e) => {
     if (!d.game.me.class == 'warrior' || !opened || curEdge == e.edge) return
     curEdge = e.edge
     ui.send('edgeUpdate', { text: e.edge })
