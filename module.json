@@ -3,7 +3,7 @@
 	"name": "warrior-edge-ui",
 	"author": "Snug",
 	"description": "A toolbox/electron gui based replacement for warrior edge being slow/stuck",
-	"version": "1.3",
+	"version": "1.4",
 	"donationUrl": "https://play.google.com/store/apps/details?id=com.CarvedGames.SD",
 	"options": {
 		"guiName": "warrior-edge-ui",

@@ -4,23 +4,24 @@ document.addEventListener('DOMContentLoaded', () => {
   let edgeCount = document.getElementById("edgeCount"),
     edgeBar = document.getElementById("edgeBar")
 
-  mod.on('edgeLaurel', (y) => {
+  mod.on('edgeLaurel', (arg, cstmUrl) => {
     let laurel = document.getElementById("laurel")
-    switch (y.text) {
-      case 'champ': { laurel.src = 'https://i.imgur.com/xR4qrvY.png'; laurel.style = "width: 190px; transform: translate(-53%, -51%)"; } break;
-      case 'diamond': { laurel.src = 'https://i.imgur.com/CXOtfxu.png'; laurel.style = "width: 172px; transform: translate(-54%, -53%)"; } break;
-      case 'gold': { laurel.src = 'https://i.imgur.com/imBzVbJ.png'; laurel.style = "width: 172px; transform: translate(-54%, -53%)"; } break;
-      case 'silver': { laurel.src = 'https://i.imgur.com/7sJOrC4.png'; laurel.style = "width: 172px; transform: translate(-54%, -53%)"; } break;
-      case 'bronze': { laurel.src = 'https://i.imgur.com/TMIKf0z.png'; laurel.style = "width: 172px; transform: translate(-54%, -53%)"; } break;
-      case 'none': laurel.src = 'https://upload.wikimedia.org/wikipedia/commons/d/d2/Blank.png'; break;
+    switch (arg) {
+      case 'champ':
+      case 'diamond':
+      case 'gold':
+      case 'silver':
+      case 'bronze':
+      case 'custom': { laurel.src = `${arg}.png`; laurel.style = "width: 172px; transform: translate(-54%, -53%)"; } break;
+      case 'none': laurel.src = 'none.png'; break;
     }
   })
-  mod.on('edgeResize', (y) => {
-    document.getElementById("mainBody").style.transform = `scale(${y.text})`;
+  mod.on('edgeResize', (arg) => {
+    document.getElementById("mainBody").style.transform = `scale(${arg})`;
   })
 
-  mod.on('edgeUpdate', (y) => {
-    switch (y.text) {
+  mod.on('edgeUpdate', (arg) => {
+    switch (arg) {
       case 0: {
         edgeBar.style['stroke-dashoffset'] = 460;
         edgeCount.innerHTML = 0;

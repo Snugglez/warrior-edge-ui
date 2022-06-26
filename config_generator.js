@@ -2,7 +2,7 @@
 
 const DefaultSettings = {
 	windowPos: [0, 0],
-	laurel: 'champ',
+	laurel: 'diamond',
 	scale: 0.75
 }
 

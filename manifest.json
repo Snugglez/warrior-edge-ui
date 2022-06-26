@@ -1,11 +1,21 @@
 {
 	"files": {
-		"README.md": "ba24db0ca594d7c501771674505ccbf905aa95ee59069afc92d9220964791d9c",
-		"config_generator.js": "8dd6a39be23936f521b51af0389cee569a79707d24372223dd092e2dea1dc720",
-		"index.js": "d93af41050565ec6e5e652a186e90545521d2f5d303f74fe31b09541fdeedd51",
-		"module.json": "6c74045d200fe4d5ee38a5b4bce62f9d27e7116dd477ccc378f36faf23f70ae1",
+		"README.md": "98f11cd77401ea906a4300e53a897a9e2100085c42436726948b752a71baf08a",
+		"config_generator.js": "476b5970cc203020a30cc7dbea137dbcf4474afb6139da7ac6de1b96b5b0775b",
+		"index.js": "d1cfae6ba7ae5e69c79f8fa16c6b4bceb517ab40bed8ef657f31a3ae7a29b99a",
+		"module.json": "556203006bfef259858ddede25f17cc623a4ca35e53e52e2f8a9ae93517e7164",
+		"ui/bronze.png": "8b36f9a64b438246c1117058678fece25e2c78484c3a788dbdda8647287ca554",
+		"ui/champ.png": "4e2272594d6395500a5f7fb0bfbf9e7fc7d0a25bc9c4ab17ebc71c0ba64ad95e",
+		"ui/custom.png": {
+			"overwrite": false,
+			"hash": "2db0e124ecff2201895508336e21bc330308b181aa23f91c0a93362f1bcac2ef"
+		},
+		"ui/diamond.png": "30f6064bce2391e8c49bcfea88d376a8b63e8da7cad3094b0c4bca010632f68e",
+		"ui/gold.png": "1d4e06e6a72c3b6ed802e74e6008dbd04f0db5cb37e7f0f499c6ed3f743e9318",
 		"ui/index.html": "52817d4ea27221fc4052e93fb1ec770031d38bf1db9f0480682cdc475ce1c3ba",
-		"ui/main.js": "cb58bd910b967126f7307fc810240edd598d9247a415acf1777409550025860b"
+		"ui/main.js": "807d73033c190989b8484e8fb7e782e5e84ecc3a6018c05e316526d5086266e0",
+		"ui/none.png": "42b601bc0d93dfca6e350b46d113bf8e7ff9e40a87a0c57ab9b3c9c219062423",
+		"ui/silver.png": "65b68579e44f0eacfe159515759eb0dad4b8539baea0e69752b38954f819f4e9"
 	},
 	"defs": {
 		"S_PLAYER_STAT_UPDATE": [13,14,15,16,17]
