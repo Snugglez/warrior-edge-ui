@@ -1,18 +1,16 @@
 {
-	"disableAutoUpdate": false,
-	"name": "warrior-edge-ui",
-	"author": "Snug",
-	"description": "A toolbox/electron gui based replacement for warrior edge being slow/stuck",
-	"version": "1.2",
-	"donationUrl": "https://play.google.com/store/apps/details?id=com.CarvedGames.SD",
-	"options": {
-		"guiName": "warrior-edge-ui",
-		"niceName": "WarriorEdgeUI",
-		"settingsVersion": 3,
-		"settingsFile": "config.json",
-		"settingsMigrator": "config_generator.js"
-	},
-	"servers": [
-		"https://raw.githubusercontent.com/Snugglez/warrior-edge-ui/main/"
-	]
+    "disableAutoUpdate": false,
+    "name": "warrior-edge-ui",
+    "author": "&nbsp;<font color='#FFC0CB'>ketchdrown/Snug</font>",
+    "description": "A toolbox/electron gui based replacement for warrior edge being slow/stuck",
+    "version": "1.2",
+    "donationUrl": "https://play.google.com/store/apps/details?id=com.CarvedGames.SD",
+    "options": {
+        "guiName": "warrior-edge-ui",
+        "niceName": "WarriorEdgeUI",
+        "settingsVersion": 3,
+        "settingsFile": "config.json",
+        "settingsMigrator": "config_generator.js"
+    },
+    "servers": ["https://raw.githubusercontent.com/ketchdrown/warrior-edge-ui/master/"]
 }
