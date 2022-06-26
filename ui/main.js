@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let edgeCount = document.getElementById("edgeCount"),
     edgeBar = document.getElementById("edgeBar")
 
-  mod.on('edgeLaurel', (arg, cstmUrl) => {
+  mod.on('edgeLaurel', (arg) => {
     let laurel = document.getElementById("laurel")
     switch (arg) {
       case 'champ':
